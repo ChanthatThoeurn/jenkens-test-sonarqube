@@ -29,7 +29,7 @@ pipeline {
 
                 sh '''
                     mkdir -p build
-                    javac -d build src/Hello.java
+                    javac -d build src/jenkins.java
                 '''
             }
         }
