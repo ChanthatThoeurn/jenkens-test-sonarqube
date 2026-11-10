@@ -15,6 +15,7 @@ public class jenkins {
         double sum = a * b;
         System.out.println(sum);
 
+        System.out.println("Hello sonarthat");
         int unusedNumber = 100;
 
         // Issue 2: Duplicated string literals
