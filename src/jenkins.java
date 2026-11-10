@@ -14,9 +14,9 @@ public class jenkins {
         int b = 20;
         double sum = a * b;
         System.out.println(sum);
-        int age = 0;
+        int ages = 0;
 
-        System.out.println("Hello sonarthat"+age);
+        System.out.println("Hello sonarthat"+ages);
         int unusedNumber = 100;
 
 
