@@ -27,10 +27,10 @@ public class jenkins {
         System.out.println("SonarQube Testing");
 
         // Issue 3: Always true condition
-        int age = 20;
-        if (age == age) {
-            System.out.println("Age condition");
-        }
+//        int age = 20;
+//        if (age == age) {
+//            System.out.println("Age condition");
+//        }
 
         // Issue 4: Weak random generator for security use
         Random random = new Random();
