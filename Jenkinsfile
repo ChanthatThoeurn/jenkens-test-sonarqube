@@ -26,7 +26,7 @@ pipeline {
         }
         stage('Run Java') {
                     steps {
-                        sh 'java -cp build/classes Hello'
+                        sh 'java -cp build/classes jenkins'
                     }
                 }
 
