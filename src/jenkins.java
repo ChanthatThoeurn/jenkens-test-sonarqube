@@ -8,5 +8,10 @@ public class jenkins {
         String name = "Chanthat";
         String jenkins = new jenkins().print(name);
         System.out.print("hello "+jenkins);
+        int a = 10;
+        int b = 20;
+        double sum = a * b;
+        System.out.println(sum);
+
     }
 }
