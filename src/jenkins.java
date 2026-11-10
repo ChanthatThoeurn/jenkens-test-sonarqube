@@ -14,9 +14,11 @@ public class jenkins {
         int b = 20;
         double sum = a * b;
         System.out.println(sum);
+        int age = 0;
 
-        System.out.println("Hello sonarthat");
+        System.out.println("Hello sonarthat"+age);
         int unusedNumber = 100;
+
 
         // Issue 2: Duplicated string literals
         System.out.println("SonarQube Testing");
