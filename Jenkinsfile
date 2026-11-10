@@ -1,81 +1,54 @@
-
 pipeline {
     agent any
 
     options {
-        skipDefaultCheckout(true)
+        timestamps()
+        disableConcurrentBuilds()
     }
 
     stages {
         stage('Checkout GitHub') {
             steps {
-                echo 'Cloning source code from GitHub...'
                 checkout scm
-            }
-        }
-
-        stage('Check Java') {
-            steps {
-                sh '''
-                    java -version
-                    javac -version
-                '''
             }
         }
 
         stage('Compile Java') {
             steps {
-                echo 'Compiling Java source code...'
-
                 sh '''
-                    mkdir -p build
-                    javac -d build src/jenkins.java
+                    java -version
+                    javac -version
+
+                    mkdir -p build/classes
+                    javac -d build/classes src/jenkins.java
                 '''
             }
         }
-
-        stage('SonarQube Analysis') {
-            steps {
-                echo 'Checking code quality...'
-
-                script {
-                    def scannerHome = tool 'SonarScanner'
-
-                    withSonarQubeEnv() {
-                        sh """
-                            "${scannerHome}/bin/sonar-scanner"
-                        """
+        stage('Run Java') {
+                    steps {
+                        sh 'java -cp build/classes Hello'
                     }
                 }
-            }
-        }
 
-        stage('Quality Gate') {
-            steps {
-                echo 'Checking SonarQube Quality Gate...'
+                stage('SonarQube Analysis') {
+                    steps {
+                        script {
+                            def scannerHome = tool 'SonarScanner'
 
-                timeout(time: 10, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
+                            withSonarQubeEnv('SonarQube') {
+                                sh "${scannerHome}/bin/sonar-scanner"
+                            }
+                        }
+                    }
                 }
+        }
+            post {
+                    success {
+                        echo 'Java CI Analysis Submitted'
+                    }
+
+                    failure {
+                        echo 'CI Pipeline FAILED'
+                    }
             }
-        }
     }
-
-    post {
-        success {
-            echo 'SUCCESS: Code Quality PASSED!'
-        }
-
-        failure {
-            echo 'FAILURE: Check the Jenkins logs.'
-        }
-
-        aborted {
-            echo 'ABORTED: Quality Gate or timeout.'
-        }
-
-        always {
-            echo 'CI Pipeline Finished.'
-        }
-    }
-}
