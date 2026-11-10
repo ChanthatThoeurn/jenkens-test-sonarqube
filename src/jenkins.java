@@ -20,6 +20,9 @@ public class jenkins {
         int unusedNumber = 100;
 
 
+        String password = "that123";
+        String username = "bb";
+        System.out.println("Wellcome "+username +"you are"+password);
         // Issue 2: Duplicated string literals
         System.out.println("SonarQube Testing");
         System.out.println("SonarQube Testing");
